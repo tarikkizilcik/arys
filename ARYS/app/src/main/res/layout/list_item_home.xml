@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                             xmlns:app="http://schemas.android.com/apk/res-auto"
+                                             android:background="?android:attr/selectableItemBackground"
+                                             android:layout_width="match_parent"
+                                             android:layout_height="wrap_content">
+
+    <TextView
+            android:id="@+id/textViewRoom"
+            android:text="@string/global_chat"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:padding="8dp"
+            android:textColor="#ffffff"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" android:textSize="30sp"
+            android:gravity="center_vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="80dp"
+            android:layout_marginStart="80dp"/>
+
+    <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp" app:srcCompat="@drawable/ic_earth_globe" android:id="@+id/imageViewRoom"
+            app:layout_constraintTop_toTopOf="@+id/textViewRoom"
+            android:background="@android:color/transparent"
+            app:layout_constraintBottom_toBottomOf="@+id/textViewRoom"
+            android:contentDescription="@string/description_earth"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"/>
+
+    <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="#c0c0c0" app:layout_constraintTop_toBottomOf="@+id/textViewRoom"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/textViewRoom"
+            app:layout_constraintEnd_toEndOf="@+id/textViewRoom" android:layout_marginLeft="88dp"
+            android:layout_marginStart="88dp" android:layout_marginEnd="16dp" android:layout_marginRight="16dp"
+            android:id="@+id/viewSeparator"/>
+
+</android.support.constraint.ConstraintLayout>

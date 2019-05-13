@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools" xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="fill_parent" android:layout_height="fill_parent"
+        android:fitsSystemWindows="true">
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="56dp"
+            android:paddingLeft="24dp"
+            android:paddingRight="24dp">
+
+        <ImageView app:srcCompat="@drawable/ic_logo"
+                   android:layout_width="match_parent"
+                   android:layout_height="120dp"
+                   android:layout_marginBottom="24dp"
+                   android:layout_gravity="center_horizontal" android:contentDescription="@string/description_logo"/>
+
+        <!-- Name Label -->
+        <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp">
+            <EditText android:id="@+id/inputName"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:inputType="textPersonName"
+                      android:hint="@string/name" android:autofillHints="@string/name" tools:targetApi="o"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <!-- Address Label -->
+
+
+        <!--  Email Label -->
+        <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp">
+            <EditText android:id="@+id/inputEmail"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:inputType="textEmailAddress"
+                      android:hint="@string/email" android:autofillHints="@string/email" tools:targetApi="o"/>
+        </android.support.design.widget.TextInputLayout>
+
+
+        <!-- mobile number -->
+
+        <!-- Password Label -->
+        <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp">
+            <EditText android:id="@+id/inputPassword"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:inputType="textPassword"
+                      android:hint="@string/password" android:autofillHints="@string/password" tools:targetApi="o"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <!-- Password Re-enter Label -->
+        <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp">
+            <EditText android:id="@+id/inputRePassword"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:inputType="textPassword"
+                      android:hint="@string/re_password" android:importantForAutofill="no" tools:targetApi="o"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <!-- Signup Button -->
+        <android.support.v7.widget.AppCompatButton
+                android:id="@+id/buttonSignUp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="24dp"
+                android:padding="12dp"
+                android:text="@string/create_account"/>
+
+        <TextView android:id="@+id/linkLogin"
+                  android:layout_width="fill_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginBottom="24dp"
+                  android:text="@string/already_member"
+                  android:gravity="center"
+                  android:textSize="16sp"/>
+
+    </LinearLayout>
+</ScrollView>

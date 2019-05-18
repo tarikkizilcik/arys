@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.widget.Toast
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
@@ -15,9 +16,13 @@ class LoginActivity : AppCompatActivity() {
         const val REQUEST_SIGN_UP = 0
     }
 
+    private lateinit var firebaseAuth: FirebaseAuth
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+        firebaseAuth = FirebaseAuth.getInstance()
 
         buttonLogin.setOnClickListener { login() }
         linkSignUp.setOnClickListener {
@@ -41,31 +46,34 @@ class LoginActivity : AppCompatActivity() {
             setMessage("Logging in...")
             show()
         }
+
+        firebaseAuth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener {
+                progressDialog.dismiss()
+            }
+            .addOnSuccessListener {
+                onLoginSuccess()
+            }
+            .addOnFailureListener {
+                it.printStackTrace()
+
+                val errorMessage = "An error occurred while signing in"
+
+                onLoginFailed(errorMessage)
+            }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == REQUEST_SIGN_UP) {
-            if (resultCode == Activity.RESULT_OK) {
-                if (data == null) {
-                    Toast.makeText(this, "An error occurred while registering", Toast.LENGTH_LONG).show()
-                    return
-                }
-
+        if (requestCode == REQUEST_SIGN_UP)
+            if (resultCode == Activity.RESULT_OK)
                 onLoginSuccess()
-            }
-        }
     }
 
     private fun onLoginSuccess() {
         val intent = Intent(this, HomeActivity::class.java)
 
-        val socket = Connection.socket
-        socket.on(Connection.EVENT_AUTHENTICATED) {
-            this@LoginActivity.runOnUiThread {
-                startActivity(intent)
-                finish()
-            }
-        }
+        startActivity(intent)
+        finish()
     }
 
     private fun onLoginFailed(reason: String = "") {

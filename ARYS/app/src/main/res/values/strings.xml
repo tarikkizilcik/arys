@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Socket Messaging</string>
+    <string name="app_name">Akıllı Reklam Yönetim Sistemi</string>
     <string name="email">Email</string>
     <string name="name">Name</string>
     <string name="password">Password</string>
@@ -8,17 +8,9 @@
     <string name="login">Login</string>
     <string name="already_member">Already a member? Login</string>
     <string name="no_account_yet">No account yet? Create one</string>
-    <string name="global_chat">Global Chat</string>
-    <string name="group_message">Group Message</string>
-    <string name="private_message">Private Message</string>
     <string name="placeholder_email">example@example.com</string>
     <string name="placeholder_name">Example User</string>
     <string name="description_logo">Logo</string>
-    <string name="description_earth">Earth icon</string>
-    <string name="add">Add</string>
-    <string name="select_contact_type">Select a contact type</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
-    <string name="user_contact">Enter the email address of the user you want to add.</string>
-    <string name="room_contact">Enter the name of the room you want to join.</string>
 </resources>

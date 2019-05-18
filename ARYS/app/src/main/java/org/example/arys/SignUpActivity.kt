@@ -9,30 +9,20 @@ import android.util.Log
 import android.widget.EditText
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_signup.*
-import org.example.arys.database.DatabaseRef
 
 class SignUpActivity : AppCompatActivity() {
 
     companion object {
         const val TAG = "SignUpActivity"
-        private const val ERR_RES_EMAIL_IN_USE = "is already in use"
     }
 
-
     lateinit var firebaseAuth: FirebaseAuth
-    lateinit var firebaseDatabase: FirebaseDatabase
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup)
 
         firebaseAuth = FirebaseAuth.getInstance()
-
-
 
         buttonSignUp.setOnClickListener { signUp() }
         linkLogin.setOnClickListener {
@@ -53,14 +43,11 @@ class SignUpActivity : AppCompatActivity() {
 
         buttonSignUp.isEnabled = false
 
-
         val progressDialog = ProgressDialog(this, R.style.AppTheme_Dark_Dialog)
         progressDialog.apply {
             isIndeterminate = true
             setMessage("Signing up...")
             show()
-
-
         }
 
         fun getInputStr(editText: EditText): String {
@@ -70,29 +57,11 @@ class SignUpActivity : AppCompatActivity() {
         val email = getInputStr(inputEmail)
         val password = getInputStr(inputPassword)
 
-        val adsRef = DatabaseRef.adsRef
-
-        adsRef.setValue("Hello World!")
-
-
-        adsRef.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-
-                val value = dataSnapshot.getValue(String::class.java)
-                Log.d(TAG, "Value is : $value")
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-
-                Log.w(TAG, "Failed to read value.", error.toException())
-            }
-
-        })
-
         firebaseAuth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener {
                 progressDialog.dismiss()
-
+            }
+            .addOnSuccessListener {
                 onSignUpSuccess()
             }
             .addOnFailureListener {
@@ -101,8 +70,6 @@ class SignUpActivity : AppCompatActivity() {
                 val errorMessage = "An error occurred while registering"
 
                 onSignUpFailed(errorMessage)
-
-                progressDialog.dismiss()
             }
     }
 

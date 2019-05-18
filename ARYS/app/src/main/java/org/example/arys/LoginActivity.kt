@@ -7,20 +7,12 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.widget.Toast
-import com.android.volley.Request
-import com.android.volley.Response
-import com.android.volley.toolbox.JsonObjectRequest
-import com.android.volley.toolbox.Volley
 import kotlinx.android.synthetic.main.activity_login.*
-import org.json.JSONException
-import org.json.JSONObject
-import java.io.UnsupportedEncodingException
 
 class LoginActivity : AppCompatActivity() {
     companion object {
         const val TAG = "LoginActivity"
         const val REQUEST_SIGN_UP = 0
-        const val EXTRA_USER = "EXTRA_USER"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,48 +41,6 @@ class LoginActivity : AppCompatActivity() {
             setMessage("Logging in...")
             show()
         }
-
-        val url = "${Connection.URL}/api/users/login"
-
-        val jsonUser = JSONObject()
-        jsonUser.put("email", email)
-        jsonUser.put("password", password)
-        val jsonBody = JSONObject()
-        jsonBody.put("user", jsonUser)
-
-        val responseListener = Response.Listener<JSONObject> {
-            progressDialog.dismiss()
-
-            onLoginSuccess(it.getJSONObject("user"))
-        }
-        val errorListener = Response.ErrorListener {
-            var errorMessage = "An error occurred while logging in"
-
-            it.networkResponse?.apply {
-                data?.apply {
-                    try {
-                        val bodyStr = String(this, Charsets.UTF_8)
-                        val body = JSONObject(bodyStr)
-
-                        val errors = body.getJSONObject("errors")
-
-                        errorMessage = errors.toString()
-                    } catch (e: UnsupportedEncodingException) {
-                        e.printStackTrace()
-                    } catch (e: JSONException) {
-                        e.printStackTrace()
-                    }
-                }
-            } ?: run { errorMessage = "Server not responding" }
-
-            onLoginFailed(errorMessage)
-
-            progressDialog.dismiss()
-        }
-        val registerUserRequest = JsonObjectRequest(Request.Method.POST, url, jsonBody, responseListener, errorListener)
-
-        val queue = Volley.newRequestQueue(this)
-        queue.add(registerUserRequest)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -101,15 +51,13 @@ class LoginActivity : AppCompatActivity() {
                     return
                 }
 
-                val userStr = data.getStringExtra(EXTRA_USER)
-                onLoginSuccess(JSONObject(userStr))
+                onLoginSuccess()
             }
         }
     }
 
-    private fun onLoginSuccess(userJson: JSONObject) {
+    private fun onLoginSuccess() {
         val intent = Intent(this, HomeActivity::class.java)
-        intent.putExtra(EXTRA_USER, userJson.toString())
 
         val socket = Connection.socket
         socket.on(Connection.EVENT_AUTHENTICATED) {
@@ -118,9 +66,6 @@ class LoginActivity : AppCompatActivity() {
                 finish()
             }
         }
-
-        val jwt = JSONObject("{token:${userJson.getString("token")}}")
-        Connection.authenticate(jwt)
     }
 
     private fun onLoginFailed(reason: String = "") {

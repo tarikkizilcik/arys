@@ -37,7 +37,7 @@ class HomeActivity : AppCompatActivity(), OnArrayItemClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        mUserString = intent.getStringExtra(LoginActivity.EXTRA_USER)
+        mUserString = intent.getStringExtra(LoginActivity.EXTRA_UID)
         mUserJson = JSONObject(mUserString)
 
         recyclerViewHome.apply {
@@ -90,7 +90,7 @@ class HomeActivity : AppCompatActivity(), OnArrayItemClickListener {
         val roomJson = bodyJson.getJSONObject("room")
 
         val intent = Intent(this@HomeActivity, ChatActivity::class.java)
-        intent.putExtra(LoginActivity.EXTRA_USER, mUserString)
+        intent.putExtra(LoginActivity.EXTRA_UID, mUserString)
         intent.putExtra(EXTRA_ROOM, roomJson.toString())
 
         this@HomeActivity.runOnUiThread {

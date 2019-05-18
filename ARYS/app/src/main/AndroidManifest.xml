@@ -17,10 +17,6 @@
                 android:name=".HomeActivity"
                 android:theme="@style/AppTheme.Dark">
         </activity>
-        <activity android:name=".ChatActivity">
-        </activity>
-        <activity android:name=".UsersActivity">
-        </activity>
         <activity
                 android:name=".SignUpActivity"
                 android:theme="@style/AppTheme.Dark">

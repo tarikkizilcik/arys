@@ -15,7 +15,6 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_signup.*
 import org.example.arys.database.DatabaseRef
-import org.json.JSONObject
 
 class SignUpActivity : AppCompatActivity() {
 
@@ -94,10 +93,7 @@ class SignUpActivity : AppCompatActivity() {
             .addOnCompleteListener {
                 progressDialog.dismiss()
 
-                val result = it.result
-                val user = result?.user?.metadata.toString()
-
-//                onSignUpSuccess(it.getJSONObject("user"))
+                onSignUpSuccess()
             }
             .addOnFailureListener {
                 it.printStackTrace()
@@ -108,16 +104,12 @@ class SignUpActivity : AppCompatActivity() {
 
                 progressDialog.dismiss()
             }
-
-
     }
 
-    private fun onSignUpSuccess(userJson: JSONObject) {
+    private fun onSignUpSuccess() {
         buttonSignUp.isEnabled = true
         setResult(Activity.RESULT_OK)
 
-        val intent = Intent().putExtra(LoginActivity.EXTRA_USER, userJson.toString())
-        setResult(Activity.RESULT_OK, intent)
         finish()
     }
 

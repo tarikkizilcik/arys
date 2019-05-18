@@ -13,4 +13,10 @@
     <string name="description_logo">Logo</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
+    <string name="firm_name">Firm Name</string>
+    <string name="firm_location">Firm Location</string>
+    <string name="promotion_content">Promotion Content</string>
+    <string name="promotion_duration">Promotion Duration</string>
+    <string name="new_ad">New Ad</string>
 </resources>

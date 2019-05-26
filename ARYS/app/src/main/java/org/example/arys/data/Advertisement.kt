@@ -1,17 +1,11 @@
 package org.example.arys.data
 
+import com.google.firebase.firestore.FieldValue
+
 data class Advertisement(
-    var FirmaID: String,
-    var FirmaAdi: String,
-    var FirmaLokasyon: String,
-    var KampanyaIcerik: String,
-    var KampanyaSuresi: Long
-) {
-    companion object {
-        const val EXTRA_FIRMA_ID = "FIRMA_ID"
-        const val EXTRA_FIRMA_ADI = "FIRMA_ADI"
-        const val EXTRA_FIRMA_LOKASYON = "FIRMA_LOKASYON"
-        const val EXTRA_KAMPANYA_ICERIK = "KAMPANYA_ICERIK"
-        const val EXTRA_KAMPANYA_SURESI = "KAMPANYA_SURESI"
-    }
-}
+    var firmName: String,
+    var firmLocation: String,
+    var promotionContent: String,
+    var promotionDuration: Long,
+    var timestamp: FieldValue = FieldValue.serverTimestamp()
+)

@@ -2,6 +2,7 @@ package org.example.arys
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -14,13 +15,16 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import com.google.android.gms.maps.model.LatLng
 import kotlinx.android.synthetic.main.activity_home.*
+import java.text.DecimalFormat
 
 class HomeActivity : AppCompatActivity() {
 
     companion object {
         const val TAG = "HomeActivity"
         const val REQUEST_CODE_ALL_PERMISSIONS = 0
+        private const val REQUEST_CODE_LAT_LNG = 1
         private const val MIN_TIME = 2000L
         private const val MIN_DISTANCE = 10f
     }
@@ -31,6 +35,8 @@ class HomeActivity : AppCompatActivity() {
     )
 
     private var location: Location? = null
+    private var updateLocation = true
+    private val decimalFormat = DecimalFormat("0.000")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +45,7 @@ class HomeActivity : AppCompatActivity() {
         requestPermissions()
 
         buttonNewAd.setOnClickListener(onClickNewAd)
+        imageButtonMarker.setOnClickListener(onClickImageButtonMarker)
     }
 
     @SuppressLint("MissingPermission")
@@ -53,6 +60,24 @@ class HomeActivity : AppCompatActivity() {
         }
 
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_TIME, MIN_DISTANCE, locationListener)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (data == null) return
+
+        if (requestCode == REQUEST_CODE_LAT_LNG && resultCode == Activity.RESULT_OK) {
+            val latLng = data.getParcelableExtra<LatLng>(MapsActivity.EXTRA_LAT_LNG)
+            val location = Location(LocationManager.GPS_PROVIDER)
+
+            location.latitude = latLng.latitude
+            location.longitude = latLng.longitude
+
+            this.location = location
+
+            updateLocationGui()
+
+            updateLocation = false
+        }
     }
 
     private val onClickNewAd = View.OnClickListener {
@@ -114,9 +139,13 @@ class HomeActivity : AppCompatActivity() {
 
     private val locationListener = object : LocationListener {
         override fun onLocationChanged(location: Location?) {
+            if (!updateLocation) return
+
             this@HomeActivity.location = location ?: return
 
             Log.i(TAG, "latitude: ${location.latitude} longitude: ${location.longitude}")
+
+            updateLocationGui()
         }
 
         override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {}
@@ -124,6 +153,20 @@ class HomeActivity : AppCompatActivity() {
         override fun onProviderEnabled(provider: String?) {}
 
         override fun onProviderDisabled(provider: String?) {}
+    }
 
+    private val onClickImageButtonMarker = View.OnClickListener {
+        val intent = Intent(this, MapsActivity::class.java)
+
+        startActivityForResult(intent, REQUEST_CODE_LAT_LNG)
+    }
+
+    private fun updateLocationGui() {
+        location?.apply {
+            textViewLatitude.text =
+                getString(R.string.text_with_colon, getString(R.string.latitude), decimalFormat.format(latitude))
+            textViewLongitude.text =
+                getString(R.string.text_with_colon, getString(R.string.longitude), decimalFormat.format(longitude))
+        }
     }
 }

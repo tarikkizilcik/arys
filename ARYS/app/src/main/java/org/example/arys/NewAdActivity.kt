@@ -18,7 +18,7 @@ import java.text.DecimalFormat
 class NewAdActivity : AppCompatActivity() {
     companion object {
         const val TAG = "NewAdActivity"
-        const val REQUEST_CODE_LAT_LNG = 0
+        private const val REQUEST_CODE_LAT_LNG = 0
     }
 
     private val decimalFormat = DecimalFormat("0.000")

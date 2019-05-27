@@ -27,4 +27,5 @@
     <string name="text_with_colon">%1$s: %2$s</string>
     <string name="dummy_latitude">Latitude:</string>
     <string name="dummy_longitude">Longitude:</string>
+    <string name="list_promotions">List Promotions</string>
 </resources>

@@ -1,3 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+
 <resources>
     <string name="app_name">Akıllı Reklam Yönetim Sistemi</string>
     <string name="email">Email</string>
@@ -15,9 +17,10 @@
     <string name="cancel">Cancel</string>
     <string name="save">Save</string>
     <string name="firm_name">Firm Name</string>
-    <string name="firm_location">Firm Location</string>
     <string name="promotion_content">Promotion Content</string>
     <string name="promotion_duration">Promotion Duration</string>
     <string name="new_ad">New Ad</string>
     <string name="permission_fine_location_needed">Location permission must be granted</string>
+    <string name="latitude">Latitude</string>
+    <string name="longitude">Longitude</string>
 </resources>

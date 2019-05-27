@@ -27,7 +27,8 @@ class NewAdActivity : AppCompatActivity() {
     private val onClickSaveButton = View.OnClickListener {
         val advertisement = Advertisement(
             editTextFirmName.text.toString(),
-            editTextFirmLocation.text.toString(),
+            editTextLatitude.text.toString().toDouble(),
+            editTextLongitude.text.toString().toDouble(),
             editTextPromotionContent.text.toString(),
             editTextPromotionDuration.text.toString().toLong()
         )

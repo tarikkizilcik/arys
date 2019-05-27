@@ -23,4 +23,8 @@
     <string name="permission_fine_location_needed">Location permission must be granted</string>
     <string name="latitude">Latitude</string>
     <string name="longitude">Longitude</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="text_with_colon">%1$s: %2$s</string>
+    <string name="dummy_latitude">Latitude:</string>
+    <string name="dummy_longitude">Longitude:</string>
 </resources>

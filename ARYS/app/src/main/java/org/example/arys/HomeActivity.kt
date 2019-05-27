@@ -45,7 +45,9 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun requestPermissions() {
-        val pendingPermissions = permissions.distinctBy { s -> !hasPermission(s) }.toTypedArray()
+        val pendingPermissions = permissions.filter { s -> !hasPermission(s) }.toTypedArray()
+
+        if (pendingPermissions.isEmpty()) return
 
         pendingPermissions.forEach {
             // Permission is not granted

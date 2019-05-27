@@ -24,41 +24,49 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:targetApi="o" />
 
-    <EditText
-        android:id="@+id/editTextLatitude"
-        android:layout_width="0dp"
+    <TextView
+        android:id="@+id/textViewLatitude"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
         android:ems="10"
-        android:hint="@string/latitude"
+        android:hint="@string/dummy_latitude"
         android:importantForAutofill="no"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editTextFirmName"
+        android:inputType="none"
+        android:textSize="18.5sp"
+        app:layout_constraintLeft_toRightOf="@id/imageButtonMarker"
+        app:layout_constraintTop_toTopOf="@id/imageButtonMarker"
         tools:targetApi="o" />
 
-    <EditText
-        android:id="@+id/editTextLongitude"
-        android:layout_width="0dp"
+    <TextView
+        android:id="@+id/textViewLongitude"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_weight="1"
+        android:ems="10"
+        android:hint="@string/dummy_longitude"
+        android:importantForAutofill="no"
+        android:inputType="none"
+        android:textSize="18.5sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageButtonMarker"
+        app:layout_constraintLeft_toLeftOf="@id/textViewLatitude"
+        tools:targetApi="o" />
+
+    <ImageButton
+        android:id="@+id/imageButtonMarker"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:ems="10"
-        android:hint="@string/longitude"
-        android:importantForAutofill="no"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editTextLatitude"
-        tools:targetApi="o" />
+        android:contentDescription="@null"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextFirmName"
+        app:srcCompat="@drawable/ic_marker" />
 
     <EditText
         android:id="@+id/editTextPromotionContent"
@@ -75,7 +83,7 @@
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editTextLongitude"
+        app:layout_constraintTop_toBottomOf="@+id/imageButtonMarker"
         tools:targetApi="o" />
 
     <EditText
